@@ -30,36 +30,18 @@ const CATEGORY_ACCENT: Record<ComponentCategory, string> = {
   regulatory: "#d946ef",
 };
 
-export function MoleculeModal({ component, onClose }: MoleculeModalProps) {
-  const accent = component ? CATEGORY_ACCENT[component.category] : "#3b82f6";
-  const viewer = component ? pickViewer(component) : null;
-  const scene3D = component ? get3DType(component.id) : null;
+function renderViewer3D({
+  viewer,
+  scene3D,
+  accent,
+}: {
+  viewer: React.ReactNode;
+  scene3D: ReturnType<typeof get3DType> | null;
+  accent: string;
+}) {
+  if (viewer) return viewer;
 
-  /** 3D visualization block — uses dedicated SVG viewer if available, otherwise Three.js scene */
-  function Viewer3D() {
-    if (viewer) return <>{viewer}</>;
-    if (scene3D) {
-      return (
-        <Suspense
-          fallback={
-            <div className="flex h-56 items-center justify-center text-xs text-muted-foreground">
-              Loading 3D…
-            </div>
-          }
-        >
-          <div className="overflow-hidden rounded-2xl border border-border bg-black/5 dark:bg-white/5">
-            <Molecule3D
-              type={scene3D.type}
-              base={scene3D.base}
-              color={scene3D.color}
-              size={1.2}
-              className="h-56 w-full"
-            />
-          </div>
-        </Suspense>
-      );
-    }
-    // Universal fallback — generic 3D amino acid model colored by category
+  if (scene3D) {
     return (
       <Suspense
         fallback={
@@ -70,8 +52,9 @@ export function MoleculeModal({ component, onClose }: MoleculeModalProps) {
       >
         <div className="overflow-hidden rounded-2xl border border-border bg-black/5 dark:bg-white/5">
           <Molecule3D
-            type="aminoAcid"
-            color={accent}
+            type={scene3D.type}
+            base={scene3D.base}
+            color={scene3D.color}
             size={1.2}
             className="h-56 w-full"
           />
@@ -79,6 +62,32 @@ export function MoleculeModal({ component, onClose }: MoleculeModalProps) {
       </Suspense>
     );
   }
+
+  return (
+    <Suspense
+      fallback={
+        <div className="flex h-56 items-center justify-center text-xs text-muted-foreground">
+          Loading 3D…
+        </div>
+      }
+    >
+      <div className="overflow-hidden rounded-2xl border border-border bg-black/5 dark:bg-white/5">
+        <Molecule3D
+          type="aminoAcid"
+          color={accent}
+          size={1.2}
+          className="h-56 w-full"
+        />
+      </div>
+    </Suspense>
+  );
+}
+
+export function MoleculeModal({ component, onClose }: MoleculeModalProps) {
+  const accent = component ? CATEGORY_ACCENT[component.category] : "#3b82f6";
+  const viewer = component ? pickViewer(component) : null;
+  const scene3D = component ? get3DType(component.id) : null;
+  const viewer3D = renderViewer3D({ viewer, scene3D, accent });
 
   const cards: SliderCard[] = component
     ? [
@@ -88,7 +97,7 @@ export function MoleculeModal({ component, onClose }: MoleculeModalProps) {
           content: (
             <div className="space-y-5">
               <Header component={component} accent={accent} />
-              <Viewer3D />
+              {viewer3D}
               <Section title="What it is">
                 <p>{component.details.identity}</p>
               </Section>
@@ -108,7 +117,7 @@ export function MoleculeModal({ component, onClose }: MoleculeModalProps) {
           content: (
             <div className="space-y-5">
               <Header component={component} accent={accent} />
-              <Viewer3D />
+              {viewer3D}
               <Section title="Structure">
                 <p>{component.details.structure}</p>
               </Section>

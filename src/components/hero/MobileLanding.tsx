@@ -40,8 +40,8 @@ const FEATURES = [
   },
   {
     icon: Languages,
-    title: "8+ Languages",
-    body: "English, Arabic, Chinese, French, Russian, Farsi, Urdu, Tagalog, Spanish.",
+    title: "2 Languages",
+    body: "English and Arabic, with RTL support for Arabic.",
     tint: "bg-cyan-500/10 text-cyan-400",
   },
   {

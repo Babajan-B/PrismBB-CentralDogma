@@ -270,7 +270,7 @@ export function CodonModal({ codon, onClose }: CodonModalProps) {
                     <OverviewTab codon={codon} aa={aa} color={color} synonyms={synonyms} />
                   )}
                   {tab === "chemistry" && (
-                    <ChemistryTab codon={codon} aa={aa} color={color} />
+                    <ChemistryTab aa={aa} color={color} />
                   )}
                   {tab === "genomics" && (
                     <GenomicsTab codon={codon} synonyms={synonyms} color={color} />
@@ -404,11 +404,9 @@ function OverviewTab({
 
 /* ── Chemistry Tab ── */
 function ChemistryTab({
-  codon,
   aa,
   color,
 }: {
-  codon: Codon;
   aa: ReturnType<typeof getAAByAbbr3>;
   color: string;
 }) {

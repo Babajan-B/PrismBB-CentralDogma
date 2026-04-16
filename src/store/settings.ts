@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import type { LangCode } from "@/i18n/translations";
 
 export type Theme = "dark" | "light" | "system";
 export type SeqNotation = "rna" | "dna";
@@ -7,7 +8,7 @@ export type AADisplay = "one" | "three" | "full";
 
 interface SettingsState {
   theme: Theme;
-  language: string;
+  language: LangCode;
   seqNotation: SeqNotation;
   aaDisplay: AADisplay;
   animationSpeed: number;
@@ -16,7 +17,7 @@ interface SettingsState {
   lastSeenVersion: string;
   toursCompleted: string[];
   setTheme: (t: Theme) => void;
-  setLanguage: (l: string) => void;
+  setLanguage: (l: LangCode) => void;
   setSeqNotation: (n: SeqNotation) => void;
   setAADisplay: (d: AADisplay) => void;
   setAnimationSpeed: (s: number) => void;

@@ -8,14 +8,16 @@ import {
   FlaskConical,
   ArrowRight,
   Command,
+  BookOpen,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { codons } from "@/data/geneticCode";
 import { nucleotides } from "@/data/nucleotides";
 import { allProteinComponents } from "@/data/proteinExpanded";
+import { glossaryEntries } from "@/data/glossary";
 
-type ResultKind = "codon" | "molecule" | "page";
+type ResultKind = "codon" | "molecule" | "page" | "glossary";
 
 interface SearchResult {
   kind: ResultKind;
@@ -30,6 +32,9 @@ const PAGES: Array<{ title: string; subtitle: string; href: string }> = [
   { title: "Codon Grid", subtitle: "64 interactive codons", href: "/table" },
   { title: "Molecule Engine", subtitle: "DNA · RNA · Protein", href: "/molecules" },
   { title: "Tools", subtitle: "Transcription · Translation · Mutation", href: "/tools" },
+  { title: "Genetics Quiz", subtitle: "Quick practice questions", href: "/tools/quiz" },
+  { title: "Flashcards", subtitle: "Active-recall revision cards", href: "/tools/flashcards" },
+  { title: "Glossary", subtitle: "Key genetics terms and definitions", href: "/glossary" },
   { title: "Settings", subtitle: "Theme, language, display", href: "/settings" },
 ];
 
@@ -37,12 +42,14 @@ const KIND_ICON: Record<ResultKind, typeof Grid3X3> = {
   codon: Grid3X3,
   molecule: Dna,
   page: FlaskConical,
+  glossary: BookOpen,
 };
 
 const KIND_LABEL: Record<ResultKind, string> = {
   codon: "Codons",
   molecule: "Molecules",
   page: "Pages",
+  glossary: "Glossary",
 };
 
 interface SearchDialogProps {
@@ -103,7 +110,15 @@ function SearchDialogInner({ onClose }: { onClose: () => void }) {
       href: p.href,
       score: 0,
     }));
-    return [...pageResults, ...codonResults, ...moleculeResults];
+    const glossaryResults: SearchResult[] = glossaryEntries.map((entry) => ({
+      kind: "glossary",
+      id: entry.id,
+      title: entry.term,
+      subtitle: `${entry.category} · ${entry.summary}`,
+      href: `/glossary#${entry.id}`,
+      score: 0,
+    }));
+    return [...pageResults, ...glossaryResults, ...codonResults, ...moleculeResults];
   }, []);
 
   const results = useMemo<SearchResult[]>(() => {
@@ -130,9 +145,10 @@ function SearchDialogInner({ onClose }: { onClose: () => void }) {
 
   const flat = useMemo<SearchResult[]>(() => {
     const page = results.filter((r) => r.kind === "page");
+    const glossary = results.filter((r) => r.kind === "glossary");
     const codon = results.filter((r) => r.kind === "codon");
     const molecule = results.filter((r) => r.kind === "molecule");
-    return [...page, ...codon, ...molecule];
+    return [...page, ...glossary, ...codon, ...molecule];
   }, [results]);
 
   // Clamp cursor without a setState-in-effect
@@ -190,7 +206,7 @@ function SearchDialogInner({ onClose }: { onClose: () => void }) {
               setQuery(e.target.value);
               setCursor(0);
             }}
-            placeholder="Search codons, molecules, pages…"
+            placeholder="Search codons, molecules, glossary terms, pages..."
             className="flex-1 bg-transparent py-4 text-sm outline-none placeholder:text-muted-foreground"
           />
           <kbd className="rounded border border-border bg-muted/40 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
@@ -208,7 +224,7 @@ function SearchDialogInner({ onClose }: { onClose: () => void }) {
               </span>
             </div>
           ) : (
-            (["page", "codon", "molecule"] as ResultKind[]).map((kind) => {
+            (["page", "glossary", "codon", "molecule"] as ResultKind[]).map((kind) => {
               const group = flat.filter((r) => r.kind === kind);
               if (group.length === 0) return null;
               const offset = flat.indexOf(group[0]);

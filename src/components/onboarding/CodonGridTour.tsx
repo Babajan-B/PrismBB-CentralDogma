@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { HelpCircle } from "lucide-react";
 import { GuidedTour, type TourStep } from "./GuidedTour";
 import { useSettings } from "@/store/settings";
+import { useHydrated } from "@/hooks/useHydrated";
 
 const STEPS: TourStep[] = [
   {
@@ -38,12 +39,7 @@ export function CodonGridTour() {
   const toursCompleted = useSettings((s) => s.toursCompleted);
   const markTourCompleted = useSettings((s) => s.markTourCompleted);
   const [active, setActive] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
-
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
-
+  const hydrated = useHydrated();
   const done = toursCompleted.includes(TOUR_ID);
 
   useEffect(() => {

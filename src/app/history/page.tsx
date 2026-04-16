@@ -66,7 +66,7 @@ function Photo51Demo() {
 
       <line x1={200} y1={200} x2={200} y2={215} stroke="#ec4899" strokeWidth={1} opacity={0.6} />
       <text x={200} y={228} textAnchor="middle" fill="#ec4899" fontSize={11} fontWeight="700">Photo 51 — Rosalind Franklin, 1952</text>
-      <text x={200} y={244} textAnchor="middle" fill="#888" fontSize={8.5}>King's College London · X-ray crystallography</text>
+      <text x={200} y={244} textAnchor="middle" fill="#888" fontSize={8.5}>King&apos;s College London · X-ray crystallography</text>
     </svg>
   );
 }
@@ -264,7 +264,7 @@ export default function HistoryPage() {
         </div>
         <h1 className="text-3xl font-black tracking-tight md:text-4xl">DNA Structure History</h1>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          From Miescher's nuclein in 1869 to the complete human genome in 2003 — the story of how humanity decoded the molecule of life.
+          From Miescher&apos;s nuclein in 1869 to the complete human genome in 2003 — the story of how humanity decoded the molecule of life.
         </p>
       </header>
 
@@ -361,7 +361,7 @@ export default function HistoryPage() {
                   <h2 className="mb-1 text-xl font-black" style={{ color: "#8a1a50" }}>Rosalind Franklin</h2>
                   <p className="mb-4 text-xs" style={{ color: "var(--card-text)", opacity: 0.55 }}>1920–1958 · Physical chemist & X-ray crystallographer</p>
                   <p className="text-sm leading-relaxed" style={{ color: "var(--card-text)", opacity: 0.75 }}>
-                    Franklin used X-ray crystallography to study the structure of DNA at King's College London. Her meticulous work produced Photo 51 — the most detailed image of DNA ever captured at that time.
+                    Franklin used X-ray crystallography to study the structure of DNA at King&apos;s College London. Her meticulous work produced Photo 51 — the most detailed image of DNA ever captured at that time.
                   </p>
                 </div>
 
@@ -418,7 +418,7 @@ export default function HistoryPage() {
                   <h2 className="mb-1 text-xl font-black" style={{ color: "#1a6a40" }}>Watson &amp; Crick, 1953</h2>
                   <p className="mb-4 text-xs" style={{ color: "var(--card-text)", opacity: 0.55 }}>James Watson (USA) · Francis Crick (UK) · Cavendish Laboratory, Cambridge</p>
                   <p className="text-sm leading-relaxed" style={{ color: "var(--card-text)", opacity: 0.75 }}>
-                    Watson and Crick built physical models of DNA using metal plates and rods. Their breakthrough came when they realised the bases must pair specifically — Chargaff's rules told them the ratios, Franklin's Photo 51 told them the geometry.
+                    Watson and Crick built physical models of DNA using metal plates and rods. Their breakthrough came when they realised the bases must pair specifically — Chargaff&apos;s rules told them the ratios, Franklin&apos;s Photo 51 told them the geometry.
                   </p>
                 </div>
 

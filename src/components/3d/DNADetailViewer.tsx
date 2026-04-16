@@ -188,7 +188,7 @@ function HydrogenBondsSVG() {
       <text x={370} y={142} textAnchor="middle" fill="#aaa" fontSize={8}>Stronger — higher melting point</text>
       <line x1={235} y1={20} x2={235} y2={160} stroke="#ffffff10" strokeWidth={1} />
       <rect x={10} y={162} width={460} height={45} rx={8} fill="#10b98110" stroke="#10b98130" strokeWidth={1} />
-      <text x={240} y={182} textAnchor="middle" fill="#10b981" fontSize={10} fontWeight="700">Chargaff's Rule</text>
+      <text x={240} y={182} textAnchor="middle" fill="#10b981" fontSize={10} fontWeight="700">Chargaff&apos;s Rule</text>
       <text x={240} y={198} textAnchor="middle" fill="#aaa" fontSize={8.5}>%A = %T and %G = %C in any double-stranded DNA molecule</text>
     </svg>
   );
@@ -324,11 +324,11 @@ function Photo51SVG() {
 
       {/* Labels */}
       <text x={200} y={198} textAnchor="middle" fill="#ec4899" fontSize={11} fontWeight="700">Photo 51 — X-ray Diffraction Pattern</text>
-      <text x={200} y={212} textAnchor="middle" fill="#aaa" fontSize={8.5}>Rosalind Franklin, 1952 · King's College London</text>
+      <text x={200} y={212} textAnchor="middle" fill="#aaa" fontSize={8.5}>Rosalind Franklin, 1952 · King&apos;s College London</text>
 
       {/* Annotation: X = helix */}
       <line x1={275} y1={60} x2={310} y2={40} stroke="#ec4899" strokeWidth={1} opacity={0.6} />
-      <text x={313} y={38} fill="#ec4899" fontSize={8}>The "X" = helical</text>
+      <text x={313} y={38} fill="#ec4899" fontSize={8}>The &quot;X&quot; = helical</text>
       <text x={313} y={50} fill="#ec4899" fontSize={8}>structure</text>
 
       {/* Annotation: layer lines = pitch */}

@@ -3,7 +3,8 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Tools — GeneCode",
-  description: "Interactive DNA/RNA/protein tools: transcription, translation, mutation simulator, splicing, worksheet generator, and virtual lab.",
+  description:
+    "Interactive DNA/RNA/protein tools: transcription, translation, mutation simulator, splicing, worksheet generator, virtual lab, genetics quiz, and flashcards.",
 };
 
 const TOOLS = [
@@ -54,6 +55,30 @@ const TOOLS = [
     desc: "Animate ribosome translation with a growing protein chain.",
     cardVar: "--card-sky",
     badge: "Simulation",
+  },
+  {
+    href: "/tools/quiz",
+    icon: "📝",
+    title: "Genetics Quiz",
+    desc: "Check understanding with fast multiple-choice revision questions.",
+    cardVar: "--card-peach",
+    badge: "Practice",
+  },
+  {
+    href: "/tools/flashcards",
+    icon: "🗂️",
+    title: "Flashcards",
+    desc: "Revise key genetics ideas with active-recall flashcards and review tracking.",
+    cardVar: "--card-teal",
+    badge: "Revision",
+  },
+  {
+    href: "/glossary",
+    icon: "📚",
+    title: "Glossary",
+    desc: "Search important genetics terms across DNA, RNA, inheritance, and lab skills.",
+    cardVar: "--card-salmon",
+    badge: "Study",
   },
 ];
 

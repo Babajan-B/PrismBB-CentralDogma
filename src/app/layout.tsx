@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { PillNav } from "@/components/ui/PillNav";
 import { OnboardingProvider } from "@/components/onboarding/OnboardingProvider";
 import { LanguageProvider } from "@/components/settings/LanguageProvider";
+import { ThemeProvider } from "@/components/settings/ThemeProvider";
+import { PreferencesScript } from "@/components/settings/PreferencesScript";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -74,15 +78,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      dir="ltr"
+      suppressHydrationWarning
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
+        <PreferencesScript />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
+        <ThemeProvider />
         <LanguageProvider />
         <OnboardingProvider>
           <PillNav />

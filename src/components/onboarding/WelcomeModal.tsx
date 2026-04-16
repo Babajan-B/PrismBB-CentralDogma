@@ -18,7 +18,7 @@ const FEATURES = [
   { icon: Dna, title: "Molecule Engine", body: "DNA, RNA & protein components." },
   { icon: FlaskConical, title: "Interactive Tools", body: "Transcription, translation, mutation." },
   { icon: Sparkles, title: "3D Models", body: "tRNA, ribosome, amino acids." },
-  { icon: Globe, title: "8+ Languages", body: "Arabic, Chinese, Spanish, more." },
+  { icon: Globe, title: "2 Languages", body: "English and Arabic, including RTL layout support." },
 ];
 
 interface WelcomeModalProps {

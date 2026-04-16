@@ -43,8 +43,7 @@ function SectionCard({ children }: { children: React.ReactNode }) {
    Pattern 1 — Classical Mendelian
 ───────────────────────────────────────────────────────────────── */
 
-const ALLELES = ["A", "a"] as const;
-type Allele = (typeof ALLELES)[number];
+type Allele = "A" | "a";
 
 function isUpper(a: string) {
   return a === a.toUpperCase() && a !== a.toLowerCase();

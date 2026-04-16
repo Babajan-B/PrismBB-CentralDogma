@@ -1,113 +1,149 @@
-# CentralDogma — Interactive Genetic Code Reference
+# GeneCode
 
-A free, open-source interactive atlas of the central dogma — from DNA structure through RNA transcription to protein translation. Explore 64 codons, simulate mutations, and generate printable worksheets.
+GeneCode is an interactive genetics learning app focused on the central dogma of molecular biology. It combines a codon reference, molecule explorer, guided tools, and visual teaching pages so students can move from memorization to understanding.
 
-## Features
+## What It Includes
 
-- **64-Codon Grid**: Color-coded by amino acid category with 4-level detail for every codon
-- **Molecular Models**: Interactive 3D structures for DNA, RNA, amino acids, and nucleotides
-- **Virtual Lab**: Simulate transcription, translation, mutations, and RNA splicing
-- **Worksheet Generator**: Export print-ready biology exercises as PDF
-- **8+ Languages**: English, Arabic, Chinese, French, Russian, Farsi, Urdu, Tagalog, Spanish
-- **Fast & Free**: No installs, no accounts — works instantly in any modern browser
+- Interactive codon table with filtering, search, and deep codon detail modals
+- Molecule explorer for DNA, RNA, amino acids, and related components
+- Learning tools for transcription, translation, mutation, splicing, worksheet generation, a virtual lab, a genetics quiz, and flashcards
+- Visual concept pages for genetics topics and DNA history
+- Searchable glossary for fast revision and classroom study support
+- English and Arabic language support with RTL handling
+- Animated UI and 3D molecular views for student engagement
 
 ## Tech Stack
 
-- **Framework**: [Next.js 16](https://nextjs.org) with Turbopack
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com) with custom design tokens
-- **Animations**: [Framer Motion](https://www.framer.com/motion) and [React Three Fiber](https://docs.pmnd.rs/react-three-fiber/)
-- **UI Components**: [Lucide React](https://lucide.dev) icons
-- **State**: [Zustand](https://github.com/pmndrs/zustand)
+- Next.js 16 App Router
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Framer Motion
+- React Three Fiber / Drei
+- Zustand
 
 ## Getting Started
 
-### Development
+Install dependencies and run the dev server:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the app.
+Open `http://localhost:3000`.
 
-### Production Build
-
-```bash
-npm run build
-npm start
-```
-
-Static export to `out/` for Vercel deployment:
+## Scripts
 
 ```bash
-npm run build  # outputs to out/ (configured in next.config.ts)
+npm run dev         # start local development
+npm run lint        # run ESLint
+npm run type-check  # run TypeScript checks
+npm run build       # production build
+npm run check       # lint + type-check + build
+npm run audit:i18n  # i18n audit script
 ```
 
-### Type Check & Lint
+## Main Routes
 
-```bash
-npm run type-check   # TypeScript validation
-npm run lint         # ESLint
-npm run check        # all checks + build
-```
-
-## Deployment
-
-Deployed on [Vercel](https://vercel.com) with static export (`output: "export"`).
-
-**Deploy button:**
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyourrepo%2Fgenecode)
+- `/` home / landing page
+- `/table` codon table
+- `/molecules` molecule explorer
+- `/tools` all interactive tools
+- `/tools/transcription`
+- `/tools/translation`
+- `/tools/mutation`
+- `/tools/splicing`
+- `/tools/worksheet`
+- `/tools/virtual-lab`
+- `/tools/quiz`
+- `/tools/flashcards`
+- `/glossary`
+- `/genetic-concepts` genetics concept lessons
+- `/history` DNA discovery history
+- `/settings` language, theme, and display settings
 
 ## Project Structure
 
-```
+```text
 src/
-├── app/              # Pages: home, table, molecules, tools, settings
-├── components/       # UI components, modals, codon grid, 3D scenes
-├── data/             # Genetic code, amino acids, nucleotides
-├── hooks/            # Custom React hooks
-├── i18n/             # Internationalization
-├── lib/              # Utilities
-├── store/            # Zustand state (settings, UI)
-└── 3d/               # Three.js 3D components (optional: lazy-loaded)
+  app/          app routes and page entry points
+  components/   UI, onboarding, tools, codon grid, 3D views
+  data/         static biology datasets
+  hooks/        reusable React hooks
+  i18n/         translation dictionaries and language metadata
+  lib/          sequence logic and genetics utilities
+  store/        persisted app settings
+scripts/
+  audit-i18n.mjs
 ```
 
-## Key Pages
+## Current Focus Areas
 
-- **/** — Interactive hero with DNA helix visualization
-- **/table** — Full codon table with search, filter, and detail modals
-- **/molecules** — Molecular components (DNA, RNA, amino acids, nucleotides)
-- **/tools** — Interactive labs (transcription, translation, mutation, splicing, etc.)
-- **/settings** — Language & theme preferences
+The project is already strong as an interactive prototype. The biggest engineering priorities are:
 
-## Translations
+- keep `npm run check` green at all times
+- complete translation coverage across all UI copy
+- reduce oversized client components and pages
+- add tests around `src/lib/*` sequence logic
+- improve accessibility and keyboard support for modals and tools
 
-App supports 8+ languages. Language files in `src/i18n/`. To add a language:
+See [improve.md](./improve.md) for the full improvement plan.
 
-1. Add language config to `src/i18n/index.ts`
-2. Create translation file `src/i18n/[lang].json`
-3. Deploy
+## Ideas To Make It A More Complete Genetics Education Tool
 
-## Contributing
+If you want this to feel like a full student platform, these are the best additions:
 
-Contributions welcome! Please:
+### Core biology modules
 
-1. Fork the repo
-2. Create a feature branch (`git checkout -b feature/my-feature`)
-3. Commit changes (`git commit -m "add my feature"`)
-4. Push to branch (`git push origin feature/my-feature`)
-5. Open a pull request
+- DNA replication simulator with leading strand, lagging strand, helicase, primase, and Okazaki fragments
+- meiosis and mitosis visualizer with chromosome movement, crossing over, and ploidy changes
+- Punnett square and pedigree solver with autosomal, sex-linked, codominance, and incomplete-dominance modes
+- population genetics tools for Hardy-Weinberg equilibrium, selection, drift, migration, and mutation
+- protein synthesis error lab showing nonsense, missense, silent, and frameshift outcomes side by side
+- gene regulation lessons covering promoters, enhancers, operons, transcription factors, and epigenetics
+
+### Student practice features
+
+- quiz mode with instant feedback and difficulty levels
+- exam mode with timed worksheets and auto-generated answer keys
+- adaptive practice based on wrong answers
+- flashcards for codons, amino acids, bases, enzymes, and genetics vocabulary
+- progress tracking by topic
+- teacher dashboard for assigning tasks and reviewing performance
+
+### Visualization upgrades
+
+- chromosome explorer with karyotypes and structural abnormalities
+- CRISPR editor demo for guide RNA, Cas9 cut site, and repair outcomes
+- gel electrophoresis simulator
+- PCR simulator with denaturation, annealing, extension, and cycle counts
+- mutation heatmaps showing which positions in a sequence are most disruptive
+- pathway maps linking DNA -> RNA -> protein -> trait -> disease
+
+### Real classroom value
+
+- lesson plans aligned to school biology topics
+- printable worksheets by grade level
+- bilingual glossary with pronunciation support
+- misconception mode that explains common student mistakes
+- challenge mode with real disease examples such as sickle cell, cystic fibrosis, and thalassemia
+- offline-first classroom mode for schools with unstable internet
+
+## Recommended Product Roadmap
+
+If you want the highest-impact next steps, I would build in this order:
+
+1. Add quizzes, progress tracking, and worksheet improvements.
+2. Add DNA replication, meiosis/mitosis, and Punnett/pedigree modules.
+3. Add teacher tools and student profiles.
+4. Add advanced labs like PCR, gel electrophoresis, CRISPR, and population genetics.
+
+## Notes
+
+- This repo currently has local user changes in progress, so treat the worktree carefully before large refactors.
+- This app uses Next.js 16. Read the local Next docs in `node_modules/next/dist/docs/` before making framework-level changes.
 
 ## License
 
-MIT — Free for personal and educational use.
-
-## Credits
-
-- Design inspired by [zperiod.app](https://zperiod.app)
-- Built with [Next.js](https://nextjs.org) and [React Three Fiber](https://docs.pmnd.rs/react-three-fiber/)
-- Genetics content sourced from NCBI, UniProt, and educational references
-
----
-
-**Questions?** Open an issue or email the team.
+MIT

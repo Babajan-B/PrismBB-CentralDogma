@@ -30,7 +30,7 @@ const STATS = [
   { value: "64", label: "Codons" },
   { value: "20", label: "Amino Acids" },
   { value: "28", label: "Components" },
-  { value: "8+", label: "Languages" },
+  { value: "2", label: "Languages" },
 ];
 
 export function CentralDogmaHero() {

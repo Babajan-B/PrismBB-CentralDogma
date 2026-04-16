@@ -22,6 +22,8 @@ export function VirtualLab() {
   const result = translate(sanitizeMrna(mrnaInput));
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const speedRef = useRef(900);
+  const isFinished = currentCodon >= result.codons.length - 1;
+  const isAnimating = playing && !isFinished;
 
   function reset() {
     setPlaying(false);
@@ -30,23 +32,31 @@ export function VirtualLab() {
   }
 
   useEffect(() => {
-    reset();
-  }, [mrnaInput]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (!playing) return;
-    if (currentCodon >= result.codons.length - 1) {
-      setPlaying(false);
-      return;
-    }
+    if (!isAnimating) return;
     timerRef.current = setTimeout(() => {
       setCurrentCodon((c) => c + 1);
     }, speedRef.current);
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [playing, currentCodon, result.codons.length]);
+  }, [isAnimating, currentCodon]);
 
   const chain = result.codons.slice(0, currentCodon + 1).filter((c) => !c.isStop && !c.isStart || c.isStart);
-  const isFinished = currentCodon >= result.codons.length - 1;
+
+  function handleMrnaChange(value: string) {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    setPlaying(false);
+    setCurrentCodon(-1);
+    setMrnaInput(value);
+  }
+
+  function handlePlayToggle() {
+    if (!result.codons.length) return;
+    if (isFinished) {
+      setCurrentCodon(-1);
+      setPlaying(true);
+      return;
+    }
+    setPlaying((prev) => !prev);
+  }
 
   return (
     <div className="space-y-6 max-w-3xl mx-auto">
@@ -54,15 +64,15 @@ export function VirtualLab() {
       <div className="flex flex-wrap gap-3 items-end">
         <div className="flex-1 min-w-64">
           <label className="text-xs text-muted-foreground font-medium mb-1.5 block">mRNA Sequence</label>
-          <input type="text" value={mrnaInput} onChange={(e) => setMrnaInput(e.target.value)}
+          <input type="text" value={mrnaInput} onChange={(e) => handleMrnaChange(e.target.value)}
             className="w-full bg-muted/30 border border-border rounded-lg px-3 py-2 font-mono text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-primary uppercase"
           />
         </div>
         <div className="flex gap-2">
-          <button onClick={() => playing ? setPlaying(false) : setPlaying(true)} disabled={!result.codons.length}
+          <button onClick={handlePlayToggle} disabled={!result.codons.length}
             className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm disabled:opacity-40 hover:opacity-90 transition-opacity">
-            {playing ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-            {playing ? "Pause" : "Play"}
+            {isAnimating ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+            {isAnimating ? "Pause" : "Play"}
           </button>
           <button onClick={reset} className="p-2.5 rounded-lg bg-muted/30 border border-border text-muted-foreground hover:text-foreground transition-colors">
             <RotateCcw className="w-4 h-4" />
