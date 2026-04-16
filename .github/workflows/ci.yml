@@ -1,0 +1,47 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run type-check
+      - run: npm run build
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    needs: check
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Serve & run Lighthouse
+        run: |
+          npx serve out -l 3000 &
+          sleep 3
+          npx lighthouse http://localhost:3000 \
+            --chrome-flags="--headless --no-sandbox --disable-gpu" \
+            --output json \
+            --output-path ./lhreport.json \
+            --only-categories=performance,accessibility \
+            --quiet || true
+      - name: Assert scores
+        run: |
+          node -e "
+            const r = require('./lhreport.json');
+            const perf = Math.round(r.categories.performance.score * 100);
+            const a11y = Math.round(r.categories.accessibility.score * 100);
+            console.log('Performance:', perf, '| Accessibility:', a11y);
+            if (perf < 90) { console.error('Performance', perf, '< 90'); process.exit(1); }
+            if (a11y < 95) { console.error('Accessibility', a11y, '< 95'); process.exit(1); }
+          "

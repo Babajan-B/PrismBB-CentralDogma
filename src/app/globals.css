@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN SYSTEM — matched exactly to zperiod.app
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Light mode: zperiod warm-cream palette ── */
+  --background:        #fdfbf7;
+  --foreground:        #1d1d1f;
+  --element-bg:        #f5f0eb;
+  --element-hover:     #efe9e3;
+  --muted:             #f5f0eb;
+  --muted-foreground:  #86868b;
+  --border:            rgba(44, 36, 32, 0.10);
+  --accent:            #009ac0;
+  --text-highlight:    #d97706;
+
+  /* Glass / modal */
+  --glass-bg:          rgba(253, 251, 247, 0.85);
+  --glass-border:      rgba(44, 36, 32, 0.08);
+  --glass-shadow:      0 8px 32px rgba(0, 0, 0, 0.08);
+  --modal-bg:          rgba(253, 251, 247, 0.97);
+  --modal-text-main:   rgba(29, 29, 31, 0.90);
+  --modal-text-sub:    rgba(29, 29, 31, 0.55);
+
+  /* ── Gradients (from zperiod CSS vars) ── */
+  --brand-glow:    linear-gradient(135deg, #009ac0 0%, #70cc80 100%);
+  --premium-grad:  linear-gradient(135deg, #5568c8 0%, #6040a0 100%);
+  --p-grad:        linear-gradient(135deg, #d0505f 0%, #f0a060 100%);
+  --e-grad:        linear-gradient(135deg, #2a9ab0 0%, #75d5e8 100%);
+  --n-grad:        linear-gradient(135deg, #a0a8b0 0%, #3f4a5a 100%);
+
+  /* ── Shadows (extracted from zperiod) ── */
+  --shadow-xs:    rgba(0, 0, 0, 0.03) 0px 2px 8px 0px;
+  --shadow-sm:    rgba(0, 0, 0, 0.03) 0px 2px 8px 0px, rgba(0, 0, 0, 0.04) 0px 4px 16px 0px;
+  --shadow-md:    rgba(0, 0, 0, 0.06) 0px 20px 40px 0px, rgba(0, 0, 0, 0.04) 0px 1px 3px 0px;
+  --shadow-lg:    rgba(0, 0, 0, 0.08) 0px 14px 48px 0px;
+  --shadow-modal: rgba(0, 0, 0, 0.15) 0px 50px 120px -30px;
+
+  /* ── Easing (zperiod uses these exact cubics) ── */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Amino acid category — light mode (pastel bg / saturated fg) ── */
+  --aa-nonpolar-bg: #e2f4f8;  --aa-nonpolar-fg: #2a9ab0;
+  --aa-polar-bg:    #d6f5ec;  --aa-polar-fg:    #1a8a6a;
+  --aa-basic-bg:    #fef2c7;  --aa-basic-fg:    #b45309;
+  --aa-acidic-bg:   #fde0e0;  --aa-acidic-fg:   #b91c1c;
+  --aa-stop-bg:     #ede9f8;  --aa-stop-fg:     #6d28d9;
+
+  /* Legacy single-value aliases */
+  --aa-nonpolar: var(--aa-nonpolar-fg);
+  --aa-polar:    var(--aa-polar-fg);
+  --aa-basic:    var(--aa-basic-fg);
+  --aa-acidic:   var(--aa-acidic-fg);
+  --aa-stop:     var(--aa-stop-fg);
+  --aa-start:    #4338ca;
+
+  /* ── Spacing ── */
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  16px;
+  --spacing-lg:  24px;
+  --spacing-xl:  32px;
+  --spacing-2xl: 48px;
+
+  /* ── Radius (zperiod scale) ── */
+  --radius-sm:   8px;
+  --radius-md:   14px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-pill: 999px;
+}
+
+/* ─── Dark mode — exact zperiod tokens ─────────────────────────── */
+.dark {
+  --background:        #0e0e12;
+  --foreground:        #ffffff;
+  --element-bg:        #1a1a22;
+  --element-hover:     #2a2a36;
+  --muted:             #1a1a22;
+  --muted-foreground:  #605d6d;
+  --border:            rgba(255, 255, 255, 0.06);
+  --accent:            #009ac0;
+  --text-highlight:    #f0a050;
+
+  /* Glass / modal */
+  --glass-bg:          rgba(45, 45, 52, 0.80);
+  --glass-border:      rgba(255, 255, 255, 0.10);
+  --glass-shadow:      0 8px 32px rgba(0, 0, 0, 0.40);
+  --modal-bg:          rgba(22, 22, 30, 0.94);
+  --modal-text-main:   rgba(255, 255, 255, 0.90);
+  --modal-text-sub:    rgba(255, 255, 255, 0.55);
+
+  /* Shadows (deeper in dark) */
+  --shadow-xs:    rgba(0, 0, 0, 0.10) 0px 2px 8px 0px;
+  --shadow-sm:    rgba(0, 0, 0, 0.06) 0px 2px 12px 0px;
+  --shadow-md:    rgba(0, 0, 0, 0.06) 0px 20px 40px 0px, rgba(0, 0, 0, 0.04) 0px 1px 3px 0px;
+  --shadow-lg:    rgba(0, 0, 0, 0.08) 0px 14px 48px 0px;
+  --shadow-modal: rgba(0, 0, 0, 0.20) 0px 4px 20px 0px;
+
+  /* ── Amino acid category — dark mode: deep bg / bright fg ── */
+  /* Styled after zperiod's element category system */
+  --aa-nonpolar-bg: #1a3040;  --aa-nonpolar-fg: #75d5e8;  /* e-grad cyan */
+  --aa-polar-bg:    #0f3028;  --aa-polar-fg:    #5de8a8;  /* teal green */
+  --aa-basic-bg:    #3a2a10;  --aa-basic-fg:    #ffd37d;  /* alkaline amber */
+  --aa-acidic-bg:   #3a1020;  --aa-acidic-fg:   #ff9ca8;  /* alkali rose */
+  --aa-stop-bg:     #252030;  --aa-stop-fg:     #c4b5fd;  /* noble-gas violet */
+
+  /* Legacy aliases */
+  --aa-nonpolar: var(--aa-nonpolar-fg);
+  --aa-polar:    var(--aa-polar-fg);
+  --aa-basic:    var(--aa-basic-fg);
+  --aa-acidic:   var(--aa-acidic-fg);
+  --aa-stop:     var(--aa-stop-fg);
+  --aa-start:    #8fc9ff;
+}
+
+/* ─── Tailwind v4 @theme bridge ──────────────────────────────────── */
+@theme inline {
+  --color-background:       var(--background);
+  --color-foreground:       var(--foreground);
+  --color-muted:            var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border:           var(--border);
+  --color-accent:           var(--accent);
+  --font-sans:              var(--font-inter);
+  --font-mono:              var(--font-mono);
+}
+
+/* ─── Base styles ────────────────────────────────────────────────── */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), -apple-system, ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Sequence / code font */
+.font-sequence {
+  font-family: var(--font-mono), "SF Mono", ui-monospace, "Courier New", monospace;
+}
+
+/* ─── Glass utility ──────────────────────────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ─── zperiod card shadow utilities ─────────────────────────────── */
+.shadow-card  { box-shadow: var(--shadow-md); }
+.shadow-hover { box-shadow: var(--shadow-lg); }
+.shadow-modal { box-shadow: var(--shadow-modal); }
+
+/* ─── Spring transition utility ─────────────────────────────────── */
+.transition-spring {
+  transition: all 0.25s var(--ease-spring);
+}
+
+/* ─── Element-bg utility (zperiod card base) ─────────────────────── */
+.bg-element {
+  background: var(--element-bg);
+}
+.hover\:bg-element-hover:hover {
+  background: var(--element-hover);
+}
+
+/* ─── Scrollbar (dark, minimal — matches zperiod) ───────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
