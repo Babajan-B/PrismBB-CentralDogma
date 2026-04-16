@@ -12,7 +12,7 @@ const TOOLS = [
     icon: "🔬",
     title: "Transcription",
     desc: "Convert DNA coding strand to pre-mRNA step by step.",
-    color: "border-blue-500/30 hover:border-blue-500/60",
+    cardVar: "--card-teal",
     badge: "DNA → mRNA",
   },
   {
@@ -20,7 +20,7 @@ const TOOLS = [
     icon: "🧬",
     title: "Translation",
     desc: "Decode mRNA codon by codon into an amino acid chain.",
-    color: "border-emerald-500/30 hover:border-emerald-500/60",
+    cardVar: "--card-mint",
     badge: "mRNA → Protein",
   },
   {
@@ -28,7 +28,7 @@ const TOOLS = [
     icon: "⚡",
     title: "Mutation Simulator",
     desc: "Simulate substitution, insertion, and deletion mutations.",
-    color: "border-red-500/30 hover:border-red-500/60",
+    cardVar: "--card-pink",
     badge: "Point mutations",
   },
   {
@@ -36,7 +36,7 @@ const TOOLS = [
     icon: "✂️",
     title: "Splicing Tool",
     desc: "Mark exons and introns, then splice to mature mRNA.",
-    color: "border-violet-500/30 hover:border-violet-500/60",
+    cardVar: "--card-lavender",
     badge: "RNA processing",
   },
   {
@@ -44,7 +44,7 @@ const TOOLS = [
     icon: "📄",
     title: "Worksheet Generator",
     desc: "Generate printable biology worksheets with answer keys.",
-    color: "border-amber-500/30 hover:border-amber-500/60",
+    cardVar: "--card-yellow",
     badge: "Print-ready",
   },
   {
@@ -52,7 +52,7 @@ const TOOLS = [
     icon: "🔭",
     title: "Virtual Lab",
     desc: "Animate ribosome translation with a growing protein chain.",
-    color: "border-cyan-500/30 hover:border-cyan-500/60",
+    cardVar: "--card-sky",
     badge: "Simulation",
   },
 ];
@@ -60,28 +60,39 @@ const TOOLS = [
 export default function ToolsPage() {
   return (
     <main className="flex flex-1 flex-col px-6 py-10 max-w-5xl mx-auto w-full">
-      <h1 className="text-3xl font-bold mb-2">Interactive Tools</h1>
+      <h1 className="text-3xl font-bold mb-2 text-foreground">Interactive Tools</h1>
       <p className="text-muted-foreground mb-10">
         Hands-on simulations for the central dogma of molecular biology.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {TOOLS.map(({ href, icon, title, desc, color, badge }) => (
+        {TOOLS.map(({ href, icon, title, desc, cardVar, badge }) => (
           <Link
             key={href}
             href={href}
-            className={`group relative flex flex-col gap-3 p-5 rounded-2xl bg-muted/20 border-2 transition-all duration-200 ${color}`}
+            className="group relative flex flex-col gap-3 p-5 rounded-2xl border border-transparent transition-all duration-200 hover:scale-[1.02] hover:shadow-lg"
+            style={{
+              background: `var(${cardVar})`,
+              color: "var(--card-text)",
+            }}
           >
             <div className="text-3xl">{icon}</div>
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <h2 className="font-semibold text-base">{title}</h2>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">
+                <h2 className="font-bold text-base" style={{ color: "var(--card-text)" }}>{title}</h2>
+                <span
+                  className="text-[10px] font-mono px-1.5 py-0.5 rounded-full border"
+                  style={{
+                    background: "rgba(0,0,0,0.08)",
+                    borderColor: "rgba(0,0,0,0.12)",
+                    color: "var(--card-text)",
+                  }}
+                >
                   {badge}
                 </span>
               </div>
-              <p className="text-sm text-muted-foreground leading-snug">{desc}</p>
+              <p className="text-sm leading-snug" style={{ color: "var(--card-text)", opacity: 0.72 }}>{desc}</p>
             </div>
-            <span className="absolute bottom-4 right-4 text-muted-foreground/30 group-hover:text-primary/60 transition-colors text-lg">→</span>
+            <span className="absolute bottom-4 right-4 text-lg opacity-30 group-hover:opacity-80 transition-opacity">→</span>
           </Link>
         ))}
       </div>

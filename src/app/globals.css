@@ -5,49 +5,75 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Light mode: zperiod warm-cream palette ── */
-  --background:        #fdfbf7;
-  --foreground:        #1d1d1f;
-  --element-bg:        #f5f0eb;
-  --element-hover:     #efe9e3;
-  --muted:             #f5f0eb;
-  --muted-foreground:  #86868b;
-  --border:            rgba(44, 36, 32, 0.10);
+  /* ── Light mode: zperiod pastel palette ── */
+  --background:        #f5f2ec;   /* warm cream — zperiod page bg      */
+  --foreground:        #0d0d10;   /* near-black — all body text        */
+  --element-bg:        #eceae4;   /* card tray background               */
+  --element-hover:     #e4e0d8;
+  --muted:             #eceae4;
+  --muted-foreground:  #4a4850;   /* dark-enough gray for secondary txt */
+  --border:            rgba(30, 24, 20, 0.13);
   --accent:            #009ac0;
-  --text-highlight:    #d97706;
+  --text-highlight:    #c47a00;
+
+  /* ── zperiod pastel card palette (usable in any page) ── */
+  --card-yellow:   #f8e87c;   /* Nonpolar / alkaline-earth yellow     */
+  --card-pink:     #f8bcc8;   /* Acidic / alkali-metal blush pink     */
+  --card-teal:     #a8dce0;   /* Polar / halogen sky teal             */
+  --card-lavender: #cfc0ec;   /* Basic / nitrogen-group lavender      */
+  --card-mint:     #a8e0c0;   /* Mint green                           */
+  --card-peach:    #f8d4a8;   /* Warm peach / stop                    */
+  --card-sky:      #b0d8f0;   /* Light sky blue                       */
+  --card-salmon:   #f8c4a8;   /* Warm salmon                          */
+  --card-text:     #0d0d10;   /* Text on any pastel card (light)      */
 
   /* Glass / modal */
-  --glass-bg:          rgba(253, 251, 247, 0.85);
-  --glass-border:      rgba(44, 36, 32, 0.08);
-  --glass-shadow:      0 8px 32px rgba(0, 0, 0, 0.08);
-  --modal-bg:          rgba(253, 251, 247, 0.97);
-  --modal-text-main:   rgba(29, 29, 31, 0.90);
-  --modal-text-sub:    rgba(29, 29, 31, 0.55);
+  --glass-bg:          rgba(245, 242, 236, 0.88);
+  --glass-border:      rgba(30, 24, 20, 0.08);
+  --glass-shadow:      0 8px 32px rgba(0, 0, 0, 0.07);
+  --modal-bg:          rgba(248, 245, 239, 0.98);
+  --modal-text-main:   rgba(26, 26, 30, 0.92);
+  --modal-text-sub:    rgba(26, 26, 30, 0.54);
 
-  /* ── Gradients (from zperiod CSS vars) ── */
+  /* ── Gradients ── */
   --brand-glow:    linear-gradient(135deg, #009ac0 0%, #70cc80 100%);
   --premium-grad:  linear-gradient(135deg, #5568c8 0%, #6040a0 100%);
   --p-grad:        linear-gradient(135deg, #d0505f 0%, #f0a060 100%);
   --e-grad:        linear-gradient(135deg, #2a9ab0 0%, #75d5e8 100%);
   --n-grad:        linear-gradient(135deg, #a0a8b0 0%, #3f4a5a 100%);
 
-  /* ── Shadows (extracted from zperiod) ── */
-  --shadow-xs:    rgba(0, 0, 0, 0.03) 0px 2px 8px 0px;
-  --shadow-sm:    rgba(0, 0, 0, 0.03) 0px 2px 8px 0px, rgba(0, 0, 0, 0.04) 0px 4px 16px 0px;
-  --shadow-md:    rgba(0, 0, 0, 0.06) 0px 20px 40px 0px, rgba(0, 0, 0, 0.04) 0px 1px 3px 0px;
-  --shadow-lg:    rgba(0, 0, 0, 0.08) 0px 14px 48px 0px;
-  --shadow-modal: rgba(0, 0, 0, 0.15) 0px 50px 120px -30px;
+  /* ── Shadows ── */
+  --shadow-xs:    rgba(0, 0, 0, 0.04) 0px 2px 8px 0px;
+  --shadow-sm:    rgba(0, 0, 0, 0.04) 0px 2px 8px 0px, rgba(0, 0, 0, 0.05) 0px 4px 16px 0px;
+  --shadow-md:    rgba(0, 0, 0, 0.07) 0px 20px 40px 0px, rgba(0, 0, 0, 0.04) 0px 1px 3px 0px;
+  --shadow-lg:    rgba(0, 0, 0, 0.09) 0px 14px 48px 0px;
+  --shadow-modal: rgba(0, 0, 0, 0.16) 0px 50px 120px -30px;
 
-  /* ── Easing (zperiod uses these exact cubics) ── */
+  /* ── Easing ── */
   --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* ── Amino acid category — light mode (pastel bg / saturated fg) ── */
-  --aa-nonpolar-bg: #e2f4f8;  --aa-nonpolar-fg: #2a9ab0;
-  --aa-polar-bg:    #d6f5ec;  --aa-polar-fg:    #1a8a6a;
-  --aa-basic-bg:    #fef2c7;  --aa-basic-fg:    #b45309;
-  --aa-acidic-bg:   #fde0e0;  --aa-acidic-fg:   #b91c1c;
-  --aa-stop-bg:     #ede9f8;  --aa-stop-fg:     #6d28d9;
+  /* ══════════════════════════════════════════════════════════════
+     AMINO ACID CATEGORY COLORS — matched to zperiod.app's exact
+     pastel tile palette (sampled from the screenshot).
+     Bg  = soft pastel card face
+     Fg  = rich saturated text / border that reads well on Bg
+     ══════════════════════════════════════════════════════════════
+
+     zperiod colour families used:
+       Nonpolar  → warm yellow     (Mg / Ca / Zn row)
+       Polar     → sky blue / teal (Al / Cl / Br row)
+       Basic     → soft lavender   (N  / P      row)
+       Acidic    → blush pink      (H  / Na / K row)
+       Stop      → mint peach      (special)
+  */
+
+  /* Amino acid tile colors — pastel bg, near-black text (readable on all screens) */
+  --aa-nonpolar-bg: #f8e87c;   --aa-nonpolar-fg: #1a1400;   /* yellow  → black   */
+  --aa-polar-bg:    #a8dce0;   --aa-polar-fg:    #001820;   /* teal    → black   */
+  --aa-basic-bg:    #cfc0ec;   --aa-basic-fg:    #150a30;   /* lavender→ black   */
+  --aa-acidic-bg:   #f8bcc8;   --aa-acidic-fg:   #200008;   /* pink    → black   */
+  --aa-stop-bg:     #f8d4a8;   --aa-stop-fg:     #201000;   /* peach   → black   */
 
   /* Legacy single-value aliases */
   --aa-nonpolar: var(--aa-nonpolar-fg);
@@ -55,7 +81,7 @@
   --aa-basic:    var(--aa-basic-fg);
   --aa-acidic:   var(--aa-acidic-fg);
   --aa-stop:     var(--aa-stop-fg);
-  --aa-start:    #4338ca;
+  --aa-start:    #3730a3;
 
   /* ── Spacing ── */
   --spacing-xs:  4px;
@@ -76,6 +102,16 @@
 /* ─── Dark mode — exact zperiod tokens ─────────────────────────── */
 .dark {
   --background:        #0e0e12;
+  /* card palette — dark equivalents */
+  --card-yellow:   #3a2e0a;
+  --card-pink:     #3a1020;
+  --card-teal:     #0e2c30;
+  --card-lavender: #20142e;
+  --card-mint:     #0a2818;
+  --card-peach:    #3a1e06;
+  --card-sky:      #0a1e38;
+  --card-salmon:   #3a1c0a;
+  --card-text:     #f0f0f4;
   --foreground:        #ffffff;
   --element-bg:        #1a1a22;
   --element-hover:     #2a2a36;
@@ -136,6 +172,12 @@ body {
   font-family: var(--font-inter), -apple-system, ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Light-mode codon tile text should always be dark ──────────── */
+:root .font-sequence,
+:root [data-category] {
+  color: var(--foreground);
 }
 
 /* Sequence / code font */

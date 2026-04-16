@@ -20,28 +20,22 @@ interface MoleculeCardProps {
 
 const CATEGORY_STYLE: Record<
   ComponentCategory,
-  { label: string; bg: string; bgDark: string; accent: string; accentHex: string }
+  { label: string; cardVar: string; accentHex: string }
 > = {
   structural: {
     label: "Structural",
-    bg: "bg-blue-50",
-    bgDark: "dark:bg-blue-950/30",
-    accent: "text-blue-600 dark:text-blue-400",
-    accentHex: "#3b82f6",
+    cardVar: "--card-teal",
+    accentHex: "#0f6070",
   },
   functional: {
     label: "Functional",
-    bg: "bg-emerald-50",
-    bgDark: "dark:bg-emerald-950/30",
-    accent: "text-emerald-600 dark:text-emerald-400",
-    accentHex: "#10b981",
+    cardVar: "--card-mint",
+    accentHex: "#1a6a40",
   },
   regulatory: {
     label: "Regulatory",
-    bg: "bg-fuchsia-50",
-    bgDark: "dark:bg-fuchsia-950/30",
-    accent: "text-fuchsia-600 dark:text-fuchsia-400",
-    accentHex: "#d946ef",
+    cardVar: "--card-lavender",
+    accentHex: "#4a2e90",
   },
 };
 
@@ -67,11 +61,12 @@ export function MoleculeCard({
       className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border transition-all ${
         highlighted
           ? "border-accent ring-2 ring-accent/40"
-          : "border-border/60 hover:border-border hover:shadow-lg dark:hover:shadow-black/30"
-      } ${style.bg} ${style.bgDark}`}
+          : "border-transparent hover:shadow-lg"
+      }`}
+      style={{ background: `var(${style.cardVar})` }}
     >
       {/* Visualization Area */}
-      <div className="relative flex h-40 items-center justify-center overflow-hidden bg-white/50 dark:bg-black/20">
+      <div className="relative flex h-40 items-center justify-center overflow-hidden bg-white/30 dark:bg-black/20">
         {/* View toggle */}
         {has3D && (
           <div className="absolute right-2 top-2 z-10 flex overflow-hidden rounded-lg border border-border/40 bg-white/80 backdrop-blur-sm dark:bg-black/40">
@@ -80,7 +75,7 @@ export function MoleculeCard({
               onClick={(e) => { e.stopPropagation(); setViewMode("2d"); }}
               className={`flex items-center gap-1 px-2 py-1 text-[10px] font-semibold transition-colors ${
                 viewMode === "2d"
-                  ? `${style.accent} bg-white dark:bg-white/10`
+                  ? `text-foreground bg-white dark:bg-white/10`
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -92,7 +87,7 @@ export function MoleculeCard({
               onClick={(e) => { e.stopPropagation(); setViewMode("3d"); }}
               className={`flex items-center gap-1 px-2 py-1 text-[10px] font-semibold transition-colors ${
                 viewMode === "3d"
-                  ? `${style.accent} bg-white dark:bg-white/10`
+                  ? `text-foreground bg-white dark:bg-white/10`
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -104,7 +99,8 @@ export function MoleculeCard({
 
         {/* Category badge (top-left) */}
         <span
-          className={`absolute left-2 top-2 z-10 inline-flex items-center gap-1 rounded-full bg-white/80 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider backdrop-blur-sm dark:bg-black/40 ${style.accent}`}
+          className="absolute left-2 top-2 z-10 inline-flex items-center gap-1 rounded-full bg-white/70 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider backdrop-blur-sm dark:bg-black/40"
+          style={{ color: style.accentHex }}
         >
           <span
             className="h-1.5 w-1.5 rounded-full"

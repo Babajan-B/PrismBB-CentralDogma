@@ -30,7 +30,7 @@ interface SettingsState {
 export const useSettings = create<SettingsState>()(
   persist(
     (set, get) => ({
-      theme: "dark",
+      theme: "light",
       language: "en",
       seqNotation: "rna",
       aaDisplay: "three",

@@ -63,41 +63,41 @@ export function CodonTile({
       }}
       aria-label={`${codon.triplet} — ${codon.aminoAcid}`}
     >
-      {/* ── Top row: codon triplet + start badge ── */}
-      <div className="flex w-full items-start justify-between">
+      {/* ── Top row: START badge ── */}
+      {codon.isStart && (
         <span
-          className="font-sequence text-[8px] font-semibold leading-none opacity-70 sm:text-[10px]"
+          className="mb-0.5 self-end rounded-sm px-1 py-px text-[5px] font-bold leading-none text-white sm:text-[6px]"
+          style={{ background: "var(--aa-start)" }}
+        >
+          START
+        </span>
+      )}
+
+      {/* ── Center: codon triplet — the main identifier ── */}
+      <div className="my-1 flex flex-1 items-center justify-center sm:my-1.5">
+        <span
+          className="font-sequence text-sm font-black leading-none tracking-wide sm:text-base md:text-lg"
           style={{ color: fg }}
         >
           {triplet}
         </span>
-        {codon.isStart && (
-          <span
-            className="rounded-sm px-1 py-px text-[5px] font-bold leading-none text-white sm:text-[6px]"
-            style={{ background: "var(--aa-start)" }}
-          >
-            START
-          </span>
-        )}
       </div>
 
-      {/* ── Center: 1-letter code (like zperiod element symbol) ── */}
-      <div className="my-1 flex flex-1 items-center justify-center sm:my-2">
+      {/* ── Bottom: 1-letter + full name ── */}
+      <div className="flex w-full items-center justify-between gap-1">
         <span
-          className="text-xl font-black leading-none sm:text-2xl md:text-3xl"
+          className="text-[9px] font-bold leading-tight sm:text-[11px]"
           style={{ color: fg }}
         >
           {codon.isStop ? "✱" : codon.aminoAcid1}
         </span>
+        <span
+          className="max-w-[60%] truncate text-right text-[7px] font-medium leading-tight sm:text-[9px]"
+          style={{ color: fg, opacity: 0.7 }}
+        >
+          {codon.isStop ? "Stop" : aa?.name ?? codon.aminoAcid}
+        </span>
       </div>
-
-      {/* ── Bottom: full name (like zperiod element name) ── */}
-      <span
-        className="block max-w-full truncate text-[8px] font-medium leading-tight sm:text-[10px]"
-        style={{ color: fg, opacity: 0.75 }}
-      >
-        {codon.isStop ? "Stop" : aa?.name ?? codon.aminoAcid}
-      </span>
     </motion.button>
   );
 }
